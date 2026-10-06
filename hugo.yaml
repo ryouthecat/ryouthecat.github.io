@@ -93,6 +93,8 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/RyouLegacy"
+    - name: email
+      url: "mailto:trananhthi072007@gmail.com"
 
   fuseOpts:
     isCaseSensitive: false
