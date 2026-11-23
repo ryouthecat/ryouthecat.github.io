@@ -1,0 +1,227 @@
+/* ── fonts: GNU Unifont, self-hosted subsets. Later @font-face wins on overlaps → Vietnamese loads only its own file.
+      Unifont is a 16×16 bitmap font: crispest at 16 / 32 / 48 px. The weight range is declared so the browser never fakes bold. */
+@font-face{font-family:"Unifont";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/unifont-latin-ext.woff2) format("woff2");unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Unifont";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/unifont-vietnamese.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:"Unifont";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/unifont-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2190-2199,U+21A9,U+2212,U+2215,U+25A0-25FF,U+2713-2715,U+FEFF,U+FFFD}
+
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:vtOut 160ms cubic-bezier(.22,1,.36,1) both}
+::view-transition-new(root){animation:vtIn 200ms cubic-bezier(.22,1,.36,1) both}
+@keyframes vtOut{to{opacity:0}}
+@keyframes vtIn{from{opacity:0}}
+
+/* ── tokens ────────────────────────────────────────────────────────────────── */
+:root{
+  interpolate-size:allow-keywords;
+  --font-display:"Unifont","Cascadia Mono",ui-monospace,Menlo,Consolas,monospace;
+  --font-body:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --font-mono:"JetBrains Mono","Cascadia Code",ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --u1:16px;
+  --u2:32px;
+  --u3:48px;
+  --sh-bold:none;
+  --sh-title:.0625em .0625em 0 var(--title-shadow);
+  --accent:#6cc24a;
+  --xp:#7fff3b;
+  --wrap:1020px;
+  --prose:720px;
+  --gutter:24px;
+  --bar:62px;
+  --toc:214px;
+  --toc-gap:44px;
+  --rad:6px;
+  --rad-sm:4px;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --ease-snap:cubic-bezier(0.34,1.56,0.64,1);
+  --t-fast:150ms;
+  --t-med:240ms;
+  --t-slow:280ms;
+}
+
+/* night (default) */
+:root,[data-theme=dark]{
+  color-scheme:dark;
+  --bg:#0e1016;
+  --bg-soft:#13161f;
+  --panel:#161a24;
+  --panel-2:#1e2331;
+  --panel-hover:#1c212e;
+  --header-bg:rgba(14,16,22,.8);
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.16);
+  --highlight:rgba(255,255,255,.055);
+  --ink:#eef1f6;
+  --ink-2:#a8b2c3;
+  --ink-3:#6e788b;
+  --accent-text:color-mix(in srgb,var(--accent) 92%,#fff);
+  --accent-soft:color-mix(in srgb,var(--accent) 13%,transparent);
+  --accent-glow:color-mix(in srgb,var(--accent) 30%,transparent);
+  --accent-border:color-mix(in srgb,var(--accent) 58%,transparent);
+  --aura:color-mix(in srgb,var(--accent) 9%,transparent);
+  --code-bg:#0a0c11;
+  --title-shadow:rgba(0,0,0,.55);
+  --shadow-sm:0 2px 10px rgba(0,0,0,.28);
+  --shadow-md:0 12px 32px -8px rgba(0,0,0,.55);
+  --shadow-lg:0 24px 56px -12px rgba(0,0,0,.75);
+  --tip-bg:#141122;
+  --tip-edge:#2e2152;
+  --tip-ink:#e7e2f5;
+  --tip-note:#5ce6ff;
+  --tip-tip:#62f578;
+  --tip-important:#d58cff;
+  --tip-warning:#ffb84d;
+  --tip-caution:#ff6b6b;
+  --tip-shadow:.0625em .0625em 0 rgba(0,0,0,.5);
+  --tip-code-bg:#0d0a17;
+  --tip-inline-bg:rgba(255,255,255,.09);
+  --tip-inline-edge:rgba(255,255,255,.14);
+  --lightbox-bg:rgba(6,8,13,.88);
+  --t-c:#7b879a;--t-s:#9be074;--t-n:#f5cc74;--t-k:#ce9af0;--t-t:#5cdbd4;--t-f:#82b0ff;--t-b:#ffaf7a;--t-p:#ea8495;--t-l:#f5cc74;--t-a:#82b0ff;--t-v:#ffaf7a;--t-ad:#9be074;--t-de:#ff7f76;
+  --sky-1:#050814;--sky-2:#0a132c;--sky-3:#132248;--sky-4:#1f335f;
+  --mt-far:#172344;--mt-far-hi:#22335e;--snow:#8ea6d8;--snow-sh:#5c72a6;--mt-mid:#101b32;--mt-mid-hi:#182848;
+  --water-surf:#4588c4;--water:#245c96;--water-mid:#194474;--water-deep:#102d52;--water-caustic:rgba(130,192,255,.22);--water-glint:#cde0ff;
+  --lily:#347a41;--lily-dk:#1f522a;--reed:#3b8c47;--reed-hi:#69ba64;
+  --sand-hi:#a6966b;--sand:#8c7d55;--sand-wet:#695d41;--sand-dk:#524834;--gravel:#5d616c;
+  --grass-hi:#62b849;--grass:#458f34;--grass2:#55a440;--grass-dk:#2d6323;
+  --dirt-hi:#6f4b2c;--dirt:#634224;--dirt-dk:#583a1f;
+  --stone-hi:#656871;--stone:#5d6069;--stone-dk:#555861;--deep-hi:#40414a;--deep:#393a42;--deep-dk:#32333a;
+  --leaf:#2a5f24;--leaf2:#3b7c32;--leaf-dk:#1c4119;--spruce:#1e4b34;--spruce-hi:#2e6949;--spruce-dk:#143525;--trunk:#4a311b;
+  --cloud:rgba(70,96,152,.58);--cloud-sh:rgba(34,48,86,.66);
+  --cobble:#555964;--cobble2:#41454f;--plank:#755030;--plank-sh:#5b3c22;--log:#3d2817;--roof:#2c3547;--roof-hi:#42506b;
+  --win-glow:#ffaa3b;--win-core:#fff0ad;--smoke:rgba(185,204,240,.42);
+}
+
+/* day */
+[data-theme=light]{
+  color-scheme:light;
+  --bg:#f6f3eb;
+  --bg-soft:#eee9dc;
+  --panel:#fdfcf8;
+  --panel-2:#f0eadc;
+  --panel-hover:#ffffff;
+  --header-bg:rgba(246,243,235,.82);
+  --line:rgba(38,32,20,.10);
+  --line-2:rgba(38,32,20,.20);
+  --highlight:rgba(255,255,255,.9);
+  --ink:#1e1c17;
+  --ink-2:#544f43;
+  --ink-3:#7a7361;
+  --accent-text:color-mix(in srgb,var(--accent) 52%,#111e08);
+  --accent-soft:color-mix(in srgb,var(--accent) 16%,transparent);
+  --accent-glow:color-mix(in srgb,var(--accent) 24%,transparent);
+  --accent-border:color-mix(in srgb,var(--accent) 62%,#243118);
+  --aura:color-mix(in srgb,var(--accent) 8%,transparent);
+  --code-bg:#faf7ef;
+  --title-shadow:rgba(55,42,14,.14);
+  --shadow-sm:0 2px 10px rgba(40,32,16,.06);
+  --shadow-md:0 12px 28px -8px rgba(40,32,16,.11);
+  --shadow-lg:0 24px 48px -12px rgba(40,32,16,.18);
+  --tip-bg:#fdfcf7;
+  --tip-edge:#d7ceb8;
+  --tip-ink:var(--ink);
+  --tip-note:#077785;
+  --tip-tip:#246c22;
+  --tip-important:#8239a1;
+  --tip-warning:#945b00;
+  --tip-caution:#ba342e;
+  --tip-shadow:none;
+  --tip-code-bg:#f6f2e4;
+  --tip-inline-bg:rgba(48,38,14,.06);
+  --tip-inline-edge:rgba(48,38,14,.16);
+  --lightbox-bg:rgba(246,243,235,.9);
+  --t-c:#726b59;--t-s:#367818;--t-n:#a05900;--t-k:#8639bf;--t-t:#077872;--t-f:#2256cc;--t-b:#b04e0c;--t-p:#ae3547;--t-l:#a05900;--t-a:#2256cc;--t-v:#b04e0c;--t-ad:#2c7814;--t-de:#be3028;
+  --sky-1:#4a9ae8;--sky-2:#6eb7f5;--sky-3:#9ad1fb;--sky-4:#d4edff;
+  --mt-far:#82a8d1;--mt-far-hi:#9abde2;--snow:#f5f9ff;--snow-sh:#d0e1f4;--mt-mid:#5c83ab;--mt-mid-hi:#7299c0;
+  --water-surf:#7fd8fa;--water:#3bb0e6;--water-mid:#2890ca;--water-deep:#1c71a6;--water-caustic:rgba(218,247,255,.35);--water-glint:#f2fbff;
+  --lily:#48a840;--lily-dk:#2f782b;--reed:#52b548;--reed-hi:#8ae075;
+  --sand-hi:#f2e5b8;--sand:#dfd09c;--sand-wet:#bfa974;--sand-dk:#9e8858;--gravel:#8a8e98;
+  --grass-hi:#82cf54;--grass:#5da839;--grass2:#70bd46;--grass-dk:#428027;
+  --dirt-hi:#825934;--dirt:#77512e;--dirt-dk:#6b4829;
+  --stone-hi:#7d8089;--stone:#747780;--stone-dk:#6b6e77;--deep-hi:#4d4e57;--deep:#45464e;--deep-dk:#3d3e46;
+  --leaf:#3d8e2e;--leaf2:#55ad40;--leaf-dk:#2c6c22;--spruce:#2b6e44;--spruce-hi:#3f8f5a;--spruce-dk:#1e5032;--trunk:#694425;
+  --cloud:rgba(255,255,255,.94);--cloud-sh:rgba(188,217,246,.92);
+  --cobble:#8a8d95;--cobble2:#6f727a;--plank:#b5824a;--plank-sh:#956737;--log:#634124;--roof:#584336;--roof-hi:#735a4a;
+  --win-glow:#86c8e8;--win-core:#dff5ff;--smoke:rgba(255,255,255,.64);
+}
+
+/* ── reset & base ──────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{
+  background:var(--bg);
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:84px;
+  scrollbar-color:var(--line-2) transparent;
+}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  font:16.5px/1.68 var(--font-body);
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  overflow-x:clip;
+}
+/* whisper-soft ambient dye aura at the top of the canvas */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto;
+  height:420px;
+  pointer-events:none;
+  z-index:0;
+  contain:strict;
+  background:radial-gradient(ellipse 68% 340px at 50% -60px,var(--aura),transparent 72%);
+  transition:background var(--t-slow) var(--ease);
+}
+main,.site-footer{position:relative;z-index:1}
+main{flex:1;min-width:0}
+img,svg{max-width:100%}
+h1,h2,h3,h4,h5{font-family:var(--font-display);font-weight:400;margin:0;text-shadow:var(--sh-bold)}
+a{color:var(--accent-text);transition:color var(--t-fast) var(--ease)}
+button{font:inherit;color:inherit}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+::selection{background:color-mix(in srgb,var(--accent) 34%,transparent);color:var(--ink)}
+
+/* targeted day/night and accent crossfade (avoids transitioning thousands of inline syntax tokens) */
+html.theme-anim,
+html.theme-anim :is(body,.site-header,.site-footer,.scene,.card,.slot,.btn,.chip,.tabs a,.nav a,.tool,.row,.toc,.code,.code figcaption,.callout,.fold,.tbl,.search-box,.avatar,.status,.to-top,.about-head,.about-body,.dye-menu,kbd){
+  transition-property:background-color,color,border-color,box-shadow!important;
+  transition-duration:280ms!important;
+  transition-timing-function:var(--ease)!important;
+}
+
+.skip{
+  position:absolute;left:-999px;top:10px;z-index:120;
+  background:var(--panel);color:var(--ink);padding:8px 14px;
+  border:1.5px solid var(--accent);border-radius:var(--rad-sm);
+  box-shadow:var(--shadow-md);text-decoration:none;
+}
+.skip:focus{left:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.px{image-rendering:pixelated;flex:none;display:block}
+.ui-ico{flex:none;display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.wrap-narrow{max-width:calc(var(--prose) + 2*var(--gutter))}
+.hash{opacity:.48;margin-right:1px;transition:opacity var(--t-fast) var(--ease),color var(--t-fast) var(--ease)}
+
+@keyframes fadeUp{
+  from{opacity:.01;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+@media print{
+  body::before,.site-header,.site-footer,.toc,.pager,.scene,.to-top{display:none!important}
+  body{background:#fff;color:#000}
+}

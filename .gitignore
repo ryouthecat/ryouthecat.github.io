@@ -1,0 +1,6 @@
+# build output & caches
+dist/
+.cache/
+node_modules/
+*.log
+.DS_Store

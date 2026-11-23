@@ -1,0 +1,19 @@
+{
+  "name": "ryou-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minecraft-flavoured personal blog — zero-dependency static site generator with its own markdown engine.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node engine/cli.js dev",
+    "build": "node engine/cli.js build",
+    "new": "node engine/cli.js new",
+    "check": "node engine/cli.js check",
+    "preview": "node engine/cli.js preview",
+    "test": "node --test",
+    "bench": "node scripts/bench.mjs"
+  }
+}
