@@ -132,7 +132,7 @@ export async function build(opts = {}) {
   const ogCacheDir = join(cacheDir, 'og');
   await ensureDir(ogCacheDir);
   const emitOg = async (rel, spec) => {
-    const key = shortHash('og-v2|' + JSON.stringify(spec), 16);
+    const key = shortHash('og-v3|' + JSON.stringify(spec), 16);
     const cp = join(ogCacheDir, key + '.png');
     let buf = null;
     if (opts.cache !== false) {

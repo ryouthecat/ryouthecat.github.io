@@ -434,9 +434,9 @@ export function renderOgCard({
   const cv = new Canvas(W, H);
   const accentHex = accent || (section && SECTION_ACCENT[section.key]) || '#6cc24a';
 
-  // 1. Deep Obsidian background with subtle vertical depth
-  const topCol = hexRgb('#0c0e14');
-  const botCol = hexRgb('#12151f');
+  // 1. Deepslate Dimmed background with subtle vertical depth
+  const topCol = hexRgb('#12151e');
+  const botCol = hexRgb('#181c28');
   for (let y = 0; y < H; y++) {
     const t = y / (H - 1);
     const r = Math.round(topCol[0] + (botCol[0] - topCol[0]) * t);
@@ -461,12 +461,12 @@ export function renderOgCard({
     }
   }
 
-  // 2. Main framed Obsidian panel
+  // 2. Main framed Deepslate panel
   const px = 26;
   const py = 22;
   const pw = W - 52;
   const ph = H - 56;
-  cv.roundRect(px, py, pw, ph, 10, '#141822', 0.9, '#2a3142', 0.95);
+  cv.roundRect(px, py, pw, ph, 10, '#1b202d', 0.92, '#323a4f', 0.95);
   // Crisp top highlight hairline + accent bar along top-left edge
   cv.rect(px + 12, py + 1, pw - 24, 1, '#ffffff', 0.06);
   cv.rect(px + 24, py, 118, 2, accentHex, 0.95);

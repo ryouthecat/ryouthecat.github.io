@@ -47,7 +47,7 @@ export function layout(site, { title, description, path, body, type = 'website',
 <title>${fullTitle}</title>
 <meta name="description" content="${desc}">
 <meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0e1016">
+<meta name="theme-color" content="#161922">
 <meta name="author" content="${cfg.author}">
 ${noindex ? raw('<meta name="robots" content="noindex">') : ''}
 <link rel="canonical" href="${canonical}">
