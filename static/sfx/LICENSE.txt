@@ -1,0 +1,22 @@
+All sound effects in this directory are released under Creative Commons Zero
+(CC0 1.0 Universal — Public Domain Dedication):
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Sources:
+- boom1.mp3, boom2.mp3: Kenney "Sci-Fi Sounds" (explosionCrunch_000/002), CC0 1.0
+  https://kenney.nl/assets/sci-fi-sounds
+- wood.mp3: Kenney "Impact Sounds" (impactWood_heavy_000), CC0 1.0
+  https://kenney.nl/assets/impact-sounds
+- click.mp3, aim.mp3, chime.mp3, xp.mp3: Kenney "Interface Sounds"
+  (click_003, pluck_002, confirmation_002, glass_001), CC0 1.0
+  https://kenney.nl/assets/interface-sounds
+- boom3.mp3: "Chunky Explosion" via OpenGameArt.org, CC0 1.0
+  https://opengameart.org/content/chunky-explosion
+- meteor.mp3: Julien Matthey "Fireball" via OpenGameArt.org, CC0 1.0
+  https://opengameart.org/content/fireball-1
+- splash1.mp3, splash2.mp3: "40 CC0 water / splash / slime SFX" via OpenGameArt.org, CC0 1.0
+  https://opengameart.org/content/40-cc0-water-splash-slime-sfx
+- steam.mp3: Ferk / bart (default_item_smoke) via Luanti minetest_game, CC0 1.0
+- crackle.mp3: iankath (default_furnace_active excerpt) via Luanti minetest_game, CC0 1.0
+
+Files were trimmed and loudness-normalized into compact mono MP3s for web playback.

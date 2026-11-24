@@ -91,6 +91,15 @@ export const SPRITES = {
     rows: ['.oooooo.', 'oaaaaaao', 'oaAAaaao', 'oaAaaaao', 'oaaaaaao', 'oaaaaaaO', 'oaaaaaOO', '.oOOOOO.'],
     palette: { o: 'rgba(0,0,0,.45)', O: 'rgba(0,0,0,.6)', a: 'currentColor', A: 'rgba(255,255,255,.45)' },
   },
+  // 8×8 speaker icons for optional Web Audio SFX toggle
+  soundOn: {
+    rows: ['...X....', '..XX..X.', 'XXXX...X', 'XXXX.X.X', 'XXXX.X.X', 'XXXX...X', '..XX..X.', '...X....'],
+    palette: { X: 'currentColor' },
+  },
+  soundOff: {
+    rows: ['...X....', '..XX....', 'XXXX.X.X', 'XXXX..X.', 'XXXX..X.', 'XXXX.X.X', '..XX....', '...X....'],
+    palette: { X: 'currentColor' },
+  },
   // 12×12 section icons
   flag: {
     rows: [

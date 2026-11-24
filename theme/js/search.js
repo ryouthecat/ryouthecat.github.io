@@ -101,6 +101,14 @@ var update = function () {
   history.replaceState(null,'',url);
   if (suggest) suggest.hidden = !!q.trim();
   if (!q.trim()) { list.innerHTML=''; status.textContent=''; list.removeAttribute('aria-busy'); return; }
+  if (window.__ryou && window.__ryou.check(q.trim())) {
+    var ir = input.getBoundingClientRect();
+    window.__ryou.submit(q.trim(), ir.left + ir.width / 2, ir.bottom + 24);
+    status.textContent = 'Challenge complete!';
+    list.innerHTML = '<li><div class="qs-flag"><span>✦</span><div><b>Flag accepted — Enchanted Dye unlocked!</b><span>Equipped #c77dff and added Enchanted ✦ to the Dye picker.</span></div></div></li>';
+    list.removeAttribute('aria-busy');
+    return;
+  }
   list.setAttribute('aria-busy','true');
   if (!index) { list.innerHTML=''; status.textContent='Loading search…'; }
   load().then(function () { if (id===revision) render(input.value); }).catch(function () {
@@ -128,7 +136,7 @@ input.addEventListener('keydown',function (e) {
     e.preventDefault(); selected=e.key==='ArrowDown' ? Math.min(items.length-1,selected+1) : Math.max(0,selected-1);
     for(var i=0;i<items.length;i++) items[i].classList.toggle('selected',i===selected);
     items[selected].scrollIntoView({block:'nearest'});
-  } else if(e.key==='Enter') { e.preventDefault(); items[Math.max(0,selected)].querySelector('a').click(); }
+  } else if(e.key==='Enter') { e.preventDefault(); var a=items[Math.max(0,selected)].querySelector('a'); if(a) a.click(); }
 });
 var params=new URL(location.href).searchParams;
 input.value=params.get('q') || ''; code.checked=params.get('code')==='1';

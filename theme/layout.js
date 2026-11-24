@@ -26,9 +26,9 @@ export function socialIcon(name = '') {
   return '<svg class="ui-ico" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7M13 3 5.5 10.5"/></svg>';
 }
 
-// Runs before first paint: applies saved theme + accent so there is no flash.
+// Runs before first paint: applies saved theme + accent + sfx state so there is no flash.
 const THEME_BOOT = (cfg) =>
-  `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||'${cfg.defaultTheme || 'dark'}';var q=/[?&]theme=(light|dark)/.exec(location.search);if(q)t=q[1];d.setAttribute('data-theme',t);var a=localStorage.getItem('dye');if(a&&/^#[0-9a-f]{6}$/i.test(a))d.style.setProperty('--accent',a)}catch(e){d.setAttribute('data-theme','${cfg.defaultTheme || 'dark'}')}d.className='js'})()`;
+  `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||'${cfg.defaultTheme || 'dark'}';var q=/[?&]theme=(light|dark)/.exec(location.search);if(q)t=q[1];d.setAttribute('data-theme',t);var a=localStorage.getItem('dye');if(a&&/^#[0-9a-f]{6}$/i.test(a))d.style.setProperty('--accent',a);var v=parseInt(localStorage.getItem('sfx_vol'),10);if((!isNaN(v)&&v>0)||(isNaN(v)&&localStorage.getItem('sfx')==='1'))d.setAttribute('data-sfx','on')}catch(e){d.setAttribute('data-theme','${cfg.defaultTheme || 'dark'}')}d.className='js'})()`;
 
 export function layout(site, { title, description, path, body, type = 'website', scripts = [], head = '', noindex = false, jsonld = '', bodyClass = '', ogImage = '' }) {
   const { cfg, assets } = site;
@@ -93,8 +93,14 @@ export function header(site, path) {
 <nav class="nav" aria-label="Main">${cfg.nav.map((n) => html`<a href="${site.href(n.href)}"${current(n.href) ? raw(' aria-current="page"') : ''}>${n.label}</a>`)}</nav>
 <div class="tools">
 <a class="tool" id="search-toggle" href="${site.href('/search/')}" data-search="${assets.searchIndex}" data-topics="${topics}" aria-label="Search" title="Search ( / or Ctrl+K )">${raw(icon('search', 2))}</a>
+<button class="tool" id="sfx-toggle" type="button" data-sfx-base="${site.href('/sfx/')}" aria-label="Sound effects volume" aria-expanded="false" aria-controls="sfx-menu" title="Sound effects">${raw('<span class="ico-sfx-on">' + icon('soundOn', 2) + '</span><span class="ico-sfx-off">' + icon('soundOff', 2) + '</span>')}</button>
 <button class="tool" id="dye-toggle" type="button" aria-label="Accent colour" aria-expanded="false" aria-controls="dye-menu" title="Accent colour">${raw(icon('dye', 2))}</button>
 <button class="tool" id="theme-toggle" type="button" aria-label="Switch between day and night" title="Day / night"><span class="ico-sun">${raw(icon('sun', 2))}</span><span class="ico-moon">${raw(icon('moon', 2))}</span></button>
+</div>
+<div class="sfx-menu" id="sfx-menu" hidden role="group" aria-label="Sound effects volume">
+<div class="sfx-head"><span class="sfx-label">Sound FX</span><span class="sfx-val" id="sfx-val">Off</span></div>
+<input class="sfx-range" id="sfx-range" type="range" min="0" max="100" step="5" value="0" aria-label="Volume percentage">
+<div class="sfx-presets"><button type="button" class="sfx-opt" data-vol="0">Off</button><button type="button" class="sfx-opt" data-vol="20">20%</button><button type="button" class="sfx-opt" data-vol="50">50%</button><button type="button" class="sfx-opt" data-vol="100">100%</button></div>
 </div>
 <div class="dye-menu" id="dye-menu" hidden role="group" aria-label="Accent colour"><div class="dye-swatches">${cfg.dyes.map((d) => html`<button type="button" class="dye" data-color="${d.color}" data-name="${d.name}" style="--c:${d.color}" aria-label="${d.name}" title="${d.name}"></button>`)}</div><span class="dye-name" id="dye-name" aria-live="polite"></span></div>
 </div>
